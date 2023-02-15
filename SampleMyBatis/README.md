@@ -2,6 +2,7 @@
 
 ---
 
+* [Docker Hub](#docker-hub)
 * [Create tutorial](#create-tutorial)
 * [Get all tutorials](#get-all-tutorials)
 * [Get tutorial by id](#get-tutorial-by-id)
@@ -10,14 +11,59 @@
 * [Delete all tutorials](#delete-all-tutorials)
 * [Get tutorial by published](#get-tutorials-by-published)
 * [Get all tutorial by title matching](#get-tutorials-by-title)
+* [Further reading]()
 
 ***
+
+## Docker Hub
+
+Run the following code to run the image
+
+`docker pull dmloc/tutorial_project`
+
+`docker run -p 8080:8080 dmloc/tutorial_project`
+
+***
+
 
 ## Initial database
 
 **Database config**
 
 ![](./Image/Database_spring-config.png)
+
+Please make sure your database url, username, password is the same as config
+* Database url: **jdbc:h2:mem:testdb**
+* Database username: **sa**
+* Database password: is a blank space
+
+To check the database go to: **localhost:8080/h2-ui** 
+
+**Initialize database**
+
+```sql
+INSERT INTO "PUBLIC"."TUTORIAL" (DESCIPTION, PUBLISHED, TITLE) VALUES
+
+('description 1', TRUE, 'title 1'),
+
+('description 2', TRUE, 'title 2'),
+
+('des 3', TRUE, 'til 3'),
+
+('des 4', FALSE, 'til 4'),
+
+('des 5', FALSE, 'til 5'),
+
+('des 6', TRUE, 'til 6'),
+
+('des 7', FALSE, 'til 7'),
+
+('des 8', FALSE, 'til 8 '),
+
+('des 9', FALSE, 'til 9'),
+
+('des 10', TRUE, 'til 10');
+```
 
 ![Initial database](./Image/Initial-database.png)
 
@@ -92,3 +138,12 @@
 ## Get tutorial(s) by title
 
 ![](./Image/postman_get-tutorials-by-title-matching.png)
+
+***
+
+
+## Further reading
+
+[Spring boot Docker starter](https://spring.io/guides/topicals/spring-boot-docker/)
+
+[H2 database webAllowUser error solution](https://stackoverflow.com/questions/44867227/h2-console-throwing-a-error-weballowothers-in-h2-database)
