@@ -10,4 +10,6 @@ public class SampleMyBatisApplication {
         SpringApplication.run(SampleMyBatisApplication.class, args);
     }
 
+    // TODO: mvn clean install -DskipTests
+    // Clean and package the project without test
 }
