@@ -16,12 +16,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("validate")
-    public ResponseEntity<EmployeeDto> validateEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-        try {
-            employeeService.getEmployeeDto(employeeDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+    public ResponseEntity<EmployeeDto> validateEmployee(@RequestBody @Valid EmployeeDto employeeDto) throws Exception {
+        return new ResponseEntity<>(employeeService.getEmployeeDto(employeeDto), HttpStatus.OK);
     }
 }

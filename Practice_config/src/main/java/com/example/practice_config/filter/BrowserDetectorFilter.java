@@ -24,19 +24,15 @@ public class BrowserDetectorFilter implements Filter {
         httpServletResponse.addHeader("Custom-Header", "This is a custom header");
         httpServletResponse.setContentType("application/json");
 
-        String responseBody = "";
-
-        if (browser != null && false && browser.contains("Postman") && !httpServletResponse.isCommitted()) {
-            httpServletResponse.setStatus(403);
-            responseBody = "{ \"message\": \"You're requesting from Postman!\" }";
+        if (browser != null && browser.contains("Postman")) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            String responseBody = "{ \"message\": \"You're requesting from Postman!\" }";
+            httpServletResponse.getWriter().write(responseBody);
+            httpServletResponse.getWriter().flush();
         } else {
-            responseBody = "{ \"message\": \"You're requesting from " + browser + "\" }";
+            filterChain.doFilter(servletRequest, servletResponse);
         }
 
         logger.info("Inside doFilter()");
-
-        httpServletResponse.getOutputStream().print(responseBody);
-
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }
