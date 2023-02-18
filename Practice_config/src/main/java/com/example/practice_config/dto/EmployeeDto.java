@@ -18,7 +18,7 @@ public class EmployeeDto {
     private String birthDate;
     private boolean gender;
 
-    @Email(regexp = "^[a-zA-Z0-9._%+-]+@gmail.com$", message = "wrong email")
+    @Email(regexp = "^[a-zA-Z0-9._%+-]+@gmail.com$")
     @NotBlank
     private String email;
 }
