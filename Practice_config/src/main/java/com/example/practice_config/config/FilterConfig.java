@@ -13,7 +13,7 @@ public class FilterConfig {
 
     @Bean
     public FilterRegistrationBean<BrowserDetectorFilter> browserDetectorFilterFilterRegistrationBean() {
-        FilterRegistrationBean<BrowserDetectorFilter> registrationBean = new FilterRegistrationBean<BrowserDetectorFilter>();
+        FilterRegistrationBean<BrowserDetectorFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(browserDetectorFilter);
         registrationBean.addUrlPatterns("/*");
         return registrationBean;
