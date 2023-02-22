@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <h1 th:text="'Hello, ' + ${name}"></h1>
+
+    <th:block th:each="item, state: ${arr}">
+        <li th:utext="${item}"></li>
+    </th:block>
+</body>
+</html>
