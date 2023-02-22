@@ -16,9 +16,6 @@ public class TutorialServiceImpl implements SampleTutorialService {
     @Autowired
     private TutorialRepository tutorialRepository;
 
-    @Resource
-    private MyBatisTutorialRepository myBatisTutorialRepository;
-
     @Override
     public List<Tutorial> findAll() {
         return tutorialRepository.findAll();
@@ -39,10 +36,6 @@ public class TutorialServiceImpl implements SampleTutorialService {
         tutorialRepository.deleteById(id);
     }
 
-    @Override
-    public void deleteAll() {
-        tutorialRepository.deleteAll();
-    }
 
     @Override
     public List<Tutorial> findByPublished(boolean published) {
@@ -52,10 +45,5 @@ public class TutorialServiceImpl implements SampleTutorialService {
     @Override
     public Tutorial save(Tutorial tutorial) {
         return tutorialRepository.save(tutorial);
-    }
-
-    @Override
-    public int countMyBatis() {
-        return myBatisTutorialRepository.count();
     }
 }

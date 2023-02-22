@@ -55,17 +55,17 @@ public class TutorialControllerTest {
     @Test
     void createTutorial() throws Exception {
         // Define the mock tutorials
-        Tutorial tutorial = new Tutorial(null, "title 1", "description 1", true);
+        Tutorial tutorial = new Tutorial(1L, "title 1", "description 1", true);
 
         // set up for mock
-        when(tutorialService.save(tutorial)).thenReturn(tutorial);
+        when(tutorialService.save(any(Tutorial.class))).thenReturn(tutorial);
 
         mockMvc.perform(post("/api/tutorials")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(tutorial)))
                 .andExpect(status().isCreated());
 
-        verify(tutorialService, times(2)).save(tutorial);
+        verify(tutorialService, times(1)).save(any(Tutorial.class));
     }
 
 }

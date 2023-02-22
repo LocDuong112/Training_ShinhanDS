@@ -14,11 +14,7 @@ public interface SampleTutorialService {
 
     void deletedById(Long id);
 
-    void deleteAll();
-
     List<Tutorial> findByPublished(boolean published);
 
     Tutorial save(Tutorial tutorial);
-
-    int countMyBatis();
 }

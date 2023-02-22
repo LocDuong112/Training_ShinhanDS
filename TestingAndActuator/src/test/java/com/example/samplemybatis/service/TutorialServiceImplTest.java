@@ -8,13 +8,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,6 +41,30 @@ public class TutorialServiceImplTest {
         verify(tutorialRepository, times(1)).findAll();
 
         assertThat(actualTutorials).containsExactlyElementsOf(expectedTutorials);
+    }
+
+    @Test
+    void save() {
+        Tutorial expectedTutorial = new Tutorial(1L, "title 1", "description 1", true);
+
+        when(tutorialRepository.save(any(Tutorial.class))).thenReturn(expectedTutorial);
+
+        // call service
+        Tutorial actualTutorial = tutorialService.save(expectedTutorial);
+
+        // verify that repo has been called once
+        verify(tutorialRepository, times(1)).save(any(Tutorial.class));
+
+        assertThat(actualTutorial).isEqualTo(expectedTutorial);
+    }
+
+    @Test
+    void deleteById() {
+        // call service
+        tutorialService.deletedById(1L);
+
+        // verify that repo has been called once
+        verify(tutorialRepository, times(1)).deleteById(1L);
     }
 
 }
