@@ -3,20 +3,20 @@ package com.example.samplemybatis.controller;
 import com.example.samplemybatis.entity.Tutorial;
 import com.example.samplemybatis.service.SampleTutorialService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -51,4 +51,21 @@ public class TutorialControllerTest {
                 // json() to make listMockTutorials becomes json type
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(listMockTutorials)));
     }
+
+    @Test
+    void createTutorial() throws Exception {
+        // Define the mock tutorials
+        Tutorial tutorial = new Tutorial(null, "title 1", "description 1", true);
+
+        // set up for mock
+        when(tutorialService.save(tutorial)).thenReturn(tutorial);
+
+        mockMvc.perform(post("/api/tutorials")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(tutorial)))
+                .andExpect(status().isCreated());
+
+        verify(tutorialService, times(2)).save(tutorial);
+    }
+
 }
